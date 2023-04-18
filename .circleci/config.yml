@@ -1,92 +1,26 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-orbs:
-  aws-eks: circleci/aws-eks@2.2.0
-  kubernetes: circleci/kubernetes@1.3
-
-commands:
-  print_pipeline_id:
-    steps:
-      - run:
-          name: Print workflow ID
-          # ${CIRCLE_WORKFLOW_ID:0:7} takes the first 7 chars of a Built-in environment variable
-          command:
-            echo ${CIRCLE_WORKFLOW_ID:0:7}
-
-
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  setup-environment:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: python:3.7.3-stretch
-    working_directory: ~/repo
-    steps:
-      - print_pipeline_id
-      - checkout
-      - run:
-          name: make setup (via Makefile)
-          command: |
-            make setup
-      - run:
-          name: make install (via Makefile)
-          command: |
-            make install
-      - run:
-          name: make lint (via Makefile)
-          command: |
-            make lint
-  build-docker:
-    docker:
-      - image: docker:latest
-    working_directory: ~/repo
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - setup_remote_docker
       - run:
-          name: install dependencies
-          command: |
-            apk update && apk add bash
-      - run:
-          name: build docker (via Dockerfile)
-          command: |
-            sh ./run_docker.sh
-            sh ./upload_docker.sh
-  deploy-eks:
-    docker:
-      - image: python:3.7-alpine3.11
-    steps:
-      - checkout
-      - run: apk add --update tar gzip nodejs npm curl 
-      - run: pip install awscli
-      - run: aws --version
-      - run:
-          name: install aws eks
-          command: |
-            sh ./install_eksctl.sh
-      - run:
-          name: install kubectl
-          command: |
-            sh ./install_kubectl.sh
-      - run:
-          name: create aws eks cluster
-          command: |
-            aws sts get-caller-identity
-            eksctl create cluster --name capstone-eks-cluster-${CIRCLE_WORKFLOW_ID:0:7} --region=us-east-1 --zones us-east-1a,us-east-1b,us-east-1c,us-east-1d
-            eksctl utils describe-stacks --region=us-east-1 --cluster=capstone-eks-cluster-${CIRCLE_WORKFLOW_ID:0:7}
-            eksctl get cluster --name=capstone-eks-cluster-${CIRCLE_WORKFLOW_ID:0:7} --region=us-east-1
-      - run:
-          name: deploy app
-          command: |
-            kubectl get nodes
-            kubectl create deployment capstoneproject --image=muhmmadhasan2003/capstoneproject &&
-              kubectl expose deployment/capstoneproject --type="LoadBalancer" --port 80
-            kubectl get deployments,rs,svc,pods
+          name: "Say hello"
+          command: "echo Hello, World!"
 
-
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  captone:
+  say-hello-workflow:
     jobs:
-      - setup-environment
-      - build-docker:
-          requires: [setup-environment]
-      - deploy-eks:
-          requires: [build-docker]
+      - say-hello
