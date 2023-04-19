@@ -6,7 +6,7 @@
 # Step 1:
 # Create dockerpath
 # dockerpath=<your docker ID/path>
-dockerpath="muhmmadhasan2003/capstoneproject"
+dockerpath="mapremchandar/premc"
 
 # Step 2:  
 # Authenticate & tag
