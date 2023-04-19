@@ -77,7 +77,7 @@ jobs:
           name: deploy app
           command: |
             kubectl get nodes
-            kubectl create deployment capstoneproject --image=muhmmadhasan2003/capstoneproject &&
+            kubectl create deployment capstoneproject --image=mapremchandar/premc &&
               kubectl expose deployment/capstoneproject --type="LoadBalancer" --port 80
             kubectl get deployments,rs,svc,pods
 
