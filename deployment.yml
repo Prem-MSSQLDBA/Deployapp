@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: capstoneproject
-        image: muhmmadhasan2003/capstoneproject
+        image: mapremchandar/premc
         ports:
         - containerPort: 80
