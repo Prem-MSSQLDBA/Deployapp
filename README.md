@@ -8,4 +8,6 @@ Decide which options you will include in your Continuous Integration phase. Use 
 Pick a deployment type - either rolling deployment or blue/green deployment.
 For the Docker application you can either use an application which you come up with, or use an open-source application pulled from the Internet, or if you have no idea, you can use an Nginx “Hello World :)” application.
 
+##
+
 
