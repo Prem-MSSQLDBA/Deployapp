@@ -19,7 +19,7 @@ For the Docker application you can either use an application which you come up w
 ## Requirements
 Configure the following variables in your CircleCi project:
 - AWS_ACCESS_KEY_ID
-- AWS_DEFAULT_REGION
 - AWS_SECRET_ACCESS_KEY
+- AWS_DEFAULT_REGION
 - DOCKER_LOGIN
 - DOCKER_PASSWORD
