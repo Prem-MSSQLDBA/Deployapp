@@ -1,5 +1,4 @@
 ## Capstone Project
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Prem-MSSQLDBA/Deployapp/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Prem-MSSQLDBA/Deployapp/tree/main)
 
 ## Project Overview
 This Capstone project will utilize CI/CD and cloud services learned during the Udacity - AWS Cloud DevOps Engineer nanodegree.
