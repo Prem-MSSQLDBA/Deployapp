@@ -2,29 +2,29 @@
     "kind":"Deployment",
     "apiVersion":"apps/v1",
     "metadata":{
-       "name":"blue",
+       "name":"green",
        "labels":{
-          "app":"blue"
+          "app":"green"
        }
     },
     "spec":{
        "replicas":1,
        "selector":{
           "matchLabels":{
-             "app":"blue"
+             "app":"green"
           }
        },
        "template":{
           "metadata":{
              "labels":{
-                "app":"blue"
+                "app":"green"
              }
           },
           "spec":{
              "containers":[
                 {
-                   "name":"blue",
-                   "image":"muhmmadhasan2003/capstoneproject",
+                   "name":"green",
+                   "image":"mapremchandar/premc",
                    "ports":[
                       {
                          "name":"http-server",
